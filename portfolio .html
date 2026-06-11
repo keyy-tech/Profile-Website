@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kotoka Emmanuel Yayra Yaw — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #ffffff;
+      --bg-alt:     #f7f7f5;
+      --surface:    #f2f2f0;
+      --border:     #e4e4e0;
+      --border-mid: #c8c8c4;
+      --text:       #111111;
+      --text-mid:   #444444;
+      --muted:      #777777;
+      --faint:      #aaaaaa;
+      --tag-bg:     #efefed;
+      --tag-text:   #555555;
+      --nav-bg:     rgba(255,255,255,0.9);
+      --btn-bg:     #111111;
+      --btn-text:   #ffffff;
+      --hover:      #f0f0ee;
+      --edu-top:    #111111;
+    }
+    [data-theme="dark"] {
+      --bg:         #111111;
+      --bg-alt:     #181818;
+      --surface:    #222222;
+      --border:     #2e2e2e;
+      --border-mid: #404040;
+      --text:       #f0f0ee;
+      --text-mid:   #bbbbbb;
+      --muted:      #888888;
+      --faint:      #555555;
+      --tag-bg:     #282828;
+      --tag-text:   #999999;
+      --nav-bg:     rgba(17,17,17,0.9);
+      --btn-bg:     #f0f0ee;
+      --btn-text:   #111111;
+      --hover:      #1e1e1e;
+      --edu-top:    #f0f0ee;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 16px;
+      line-height: 1.65; overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4rem; height: 60px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-left { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-logo {
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.8rem;
+      color: var(--muted); letter-spacing: 0.04em;
+      transition: color 0.2s; padding: 4px 0;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); border-bottom-color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .avail {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em;
+    }
+    .avail::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e; animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .theme-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-mid); background: var(--surface);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: border-color 0.2s; color: var(--text);
+    }
+    .theme-btn:hover { border-color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: grid;
+      grid-template-columns: 1fr 1fr; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+      padding: 8rem 4rem 4rem; gap: 5rem;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.8rem;
+      border: 1px solid var(--border); padding: 0.3rem 0.85rem;
+      border-radius: 2rem; background: var(--surface);
+    }
+    h1.hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 700;
+      color: var(--text); line-height: 1.08; margin-bottom: 1.4rem;
+    }
+    h1.hero-name em { font-style: italic; font-weight: 400; }
+    .hero-desc {
+      font-size: 0.97rem; color: var(--text-mid);
+      max-width: 430px; margin-bottom: 2.4rem;
+      font-weight: 300; line-height: 1.9;
+    }
+    .hero-cta { display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center; margin-bottom: 3rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.7rem 1.5rem; border-radius: 3px;
+      font-size: 0.8rem; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; letter-spacing: 0.04em; cursor: pointer;
+    }
+    .btn-primary { background: var(--btn-bg); color: var(--btn-text); border: 1px solid transparent; }
+    .btn-primary:hover { opacity: 0.82; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-mid); }
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
+    .hero-stats { display: flex; gap: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      font-weight: 700; color: var(--text); display: block;
+      line-height: 1; margin-bottom: 0.3rem;
+    }
+    .hero-stat .lbl { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* Hero right */
+    .hero-right { display: flex; flex-direction: column; gap: 1.2rem; }
+    .avatar-row {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.4rem; background: var(--bg-alt);
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .avatar-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 700; color: var(--text); flex-shrink: 0;
+    }
+    .avatar-name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .avatar-role { font-size: 0.76rem; color: var(--muted); margin-top: 0.15rem; }
+    .terminal-card {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+    }
+    .terminal-bar {
+      padding: 0.65rem 1rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-r { background: #ef4444; } .dot-y { background: #f59e0b; } .dot-g { background: #22c55e; }
+    .terminal-body { padding: 1.4rem 1.6rem; font-family: 'Courier New', monospace; font-size: 0.8rem; line-height: 2.1; }
+    .t-key { color: var(--muted); } .t-arr { color: var(--faint); }
+    .t-val { color: var(--text); font-weight: 500; }
+
+    /* SECTIONS */
+    section { max-width: 1200px; margin: 0 auto; padding: 5.5rem 4rem; }
+    .full-divider { border: none; border-top: 1px solid var(--border); transition: border-color 0.3s; }
+    .eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.5rem; }
+    h2.sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700;
+      color: var(--text); margin-bottom: 0.4rem;
+    }
+    .sec-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 3rem; max-width: 520px; line-height: 1.7; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1.9fr; gap: 6rem; align-items: start; }
+    .about-headline {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      line-height: 1.45; color: var(--text); position: sticky; top: 5rem;
+    }
+    .about-headline em { font-style: italic; color: var(--muted); }
+    .about-body p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.95; margin-bottom: 1.1rem; }
+    .about-body strong { color: var(--text); font-weight: 600; }
+    .about-facts {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: 2rem;
+    }
+    .fact { background: var(--bg); padding: 1.2rem 1.4rem; transition: background 0.2s; }
+    .fact:hover { background: var(--hover); }
+    .fact-label { font-size: 0.67rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.3rem; }
+    .fact-val { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .skill-cell { background: var(--bg); padding: 2rem; transition: background 0.2s; }
+    .skill-cell:hover { background: var(--hover); }
+    .skill-icon {
+      width: 32px; height: 32px; border-radius: 6px;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; margin-bottom: 1rem;
+    }
+    .skill-cell h3 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.45rem; }
+    .skill-cell p  { font-size: 0.8rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tag { font-size: 0.67rem; padding: 0.18rem 0.5rem; background: var(--tag-bg); color: var(--tag-text); border-radius: 2px; letter-spacing: 0.03em; }
+
+    /* PROJECTS */
+    .projects-list {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    }
+    .project-row {
+      display: flex; flex-direction: column; gap: 0.8rem;
+      padding: 1.6rem; border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none; color: inherit;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .project-row:hover {
+      background: var(--hover);
+      border-color: var(--border-mid);
+      transform: translateY(-3px);
+    }
+    .project-num  { font-size: 0.67rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.35rem; }
+    .project-name { font-size: 0.97rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .project-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.75; flex: 1; }
+    .project-right { display: flex; flex-direction: column; gap: 0.8rem; }
+    .project-tags  { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .project-arrow { font-size: 0.88rem; color: var(--faint); transition: color 0.2s, transform 0.2s; align-self: flex-end; }
+    .project-row:hover .project-arrow { color: var(--text); transform: translate(3px,-3px); }
+
+    /* EDUCATION */
+    .edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
+    .edu-card { border-top: 1.5px solid var(--edu-top); padding-top: 1.5rem; transition: border-color 0.3s; }
+    .edu-year  { font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--faint); margin-bottom: 0.6rem; }
+    .edu-card h3  { font-size: 0.92rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; line-height: 1.4; }
+    .edu-inst     { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.6rem; }
+    .edu-card p   { font-size: 0.8rem; color: var(--faint); line-height: 1.75; }
+
+    /* CONTACT */
+    .contact-section { max-width: 1200px; margin: 0 auto; padding: 5.5rem 4rem; }
+    .contact-inner {
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: 12px; padding: 4rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    .contact-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem,3vw,2rem); font-weight: 700;
+      color: var(--text); margin-bottom: 0.8rem; line-height: 1.25;
+    }
+    .contact-left p { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 0.8rem; }
+    .contact-right { display: flex; flex-direction: column; gap: 0.7rem; }
+    .contact-link {
+      display: flex; align-items: center; justify-content: flex-start;
+      padding: 1rem 1.2rem; border-radius: 6px;
+      background: var(--bg); border: 1px solid var(--border);
+      text-decoration: none; transition: border-color 0.2s, background 0.2s; gap: 1rem;
+    }
+    .contact-link:hover { border-color: var(--border-mid); background: var(--hover); }
+    .cl-icon { font-size: 1.1rem; flex-shrink: 0; width: 24px; text-align: center; }
+    .cl-info { display: flex; align-items: baseline; gap: 0.7rem; flex: 1; text-align: left; }
+    .cl-label { font-size: 0.8rem; font-weight: 500; color: var(--text); width: 80px; flex-shrink: 0; }
+    .cl-val   { font-size: 0.74rem; color: var(--muted); }
+    .cl-arr   { font-size: 0.8rem; color: var(--faint); transition: transform 0.2s; flex-shrink: 0; margin-left: auto; }
+    .contact-link:hover .cl-arr { transform: translate(2px,-2px); color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      max-width: 1200px; margin: 0 auto; padding: 1.8rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border);
+      font-size: 0.73rem; color: var(--faint); letter-spacing: 0.04em;
+    }
+
+    /* CURSOR */
+    #typed-role { font-weight: 500; color: var(--text); }
+    .cursor {
+      display: inline-block; width: 1px; height: 0.85em;
+      background: var(--text); margin-left: 2px; vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50%{opacity:0} }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      section, .contact-section { padding: 3.5rem 1.5rem; }
+      .full-divider { margin: 0; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 3rem; }
+      .hero-right { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-headline { position: static; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .projects-list { grid-template-columns: 1fr 1fr; }
+      .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-inner { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-list { grid-template-columns: 1fr; }
+      .hero-stats  { gap: 1.5rem; }
+      .about-facts { grid-template-columns: 1fr; }
+      .cl-info { flex-direction: column; gap: 0.1rem; }
+      .cl-label { width: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-logo">KEYY</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <div class="avail">Available</div>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1200px;margin:0 auto;">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">Open to opportunities</div>
+      <h1 class="hero-name">Kotoka<br><em>Emmanuel</em><br>Yayra Yaw</h1>
+      <p class="hero-desc">CS &amp; Engineering student at UMaT, Ghana. PyClub Lead. ALX-trained backend developer and data analyst — I build things that work and look like they were made with care.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work ↓</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">12+</span><span class="lbl">Projects Built</span></div>
+        <div class="hero-stat"><span class="num">30+</span><span class="lbl">Students Mentored</span></div>
+        <div class="hero-stat"><span class="num">PyClub</span><span class="lbl">Lead @ UMaT</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="avatar-row">
+        <div class="avatar-circle">KEYY</div>
+        <div>
+          <div class="avatar-name">Kotoka Emmanuel Yayra Yaw</div>
+          <div class="avatar-role"><span id="typed-role"></span><span class="cursor"></span></div>
+        </div>
+      </div>
+      <div class="terminal-card">
+        <div class="terminal-bar">
+          <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-key">name       </span><span class="t-arr">→ </span><span class="t-val">"Kotoka Emmanuel Yayra Yaw"</span></div>
+          <div><span class="t-key">university </span><span class="t-arr">→ </span><span class="t-val">"UMaT, Ghana"</span></div>
+          <div><span class="t-key">degree     </span><span class="t-arr">→ </span><span class="t-val">"CS &amp; Engineering"</span></div>
+          <div><span class="t-key">training   </span><span class="t-arr">→ </span><span class="t-val">["Backend Dev", "Data Analysis"]</span></div>
+          <div><span class="t-key">community  </span><span class="t-arr">→ </span><span class="t-val">"PyClub Lead @ UMaT"</span></div>
+          <div><span class="t-key">creative   </span><span class="t-arr">→ </span><span class="t-val">["Photoshop", "Video Editing"]</span></div>
+          <div><span class="t-key">status     </span><span class="t-arr">→ </span><span class="t-val" style="color:#22c55e">"available"</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <div class="eyebrow">About</div>
+      <div class="about-headline">Engineer.<br>Analyst.<br><em>Community Builder.</em></div>
+    </div>
+    <div class="about-body">
+      <p>I'm <strong>Kotoka Emmanuel Yayra Yaw</strong>, a Computer Science &amp; Engineering student at the <strong>University of Mines and Technology (UMaT)</strong> in Ghana. I serve as <strong>PyClub Lead</strong> — running workshops, mentoring peers, and growing a practical Python community on campus.</p>
+      <p>Through the <strong>ALX Africa Software Engineering Programme</strong>, I completed backend development and data analysis tracks — building real, production-grade projects alongside a global cohort of engineers.</p>
+      <p>Outside of code I do video editing and Photoshop, giving me a design-aware eye when building products. I care about work that is both well-engineered and well-crafted.</p>
+      <div class="about-facts">
+        <div class="fact"><div class="fact-label">Location</div><div class="fact-val">Ghana 🇬🇭</div></div>
+        <div class="fact"><div class="fact-label">Degree</div><div class="fact-val">CS &amp; Engineering</div></div>
+        <div class="fact"><div class="fact-label">Role</div><div class="fact-val">PyClub Lead @ UMaT</div></div>
+        <div class="fact"><div class="fact-label">Status</div><div class="fact-val" style="color:#22c55e">Open to work</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="eyebrow">Skills</div>
+  <h2 class="sec-title">What I Bring</h2>
+  <p class="sec-sub">Backend engineering, data work, community leadership, and a creative production edge.</p>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-icon">⚙️</div>
+      <h3>Backend Development</h3>
+      <p>Building APIs and server-side systems with clean architecture and real deployment experience.</p>
+      <div class="tag-list"><span class="tag">Python</span><span class="tag">Django</span><span class="tag">Flask</span><span class="tag">REST APIs</span><span class="tag">PostgreSQL</span></div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-icon">📊</div>
+      <h3>Data Analysis</h3>
+      <p>Cleaning, exploring, and visualising data — turning raw numbers into clear, actionable insight.</p>
+      <div class="tag-list"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">Jupyter</span><span class="tag">SQL</span></div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-icon">🐍</div>
+      <h3>Python &amp; Community</h3>
+      <p>As PyClub Lead, I design sessions, mentor students, and build a hands-on learning culture.</p>
+      <div class="tag-list"><span class="tag">Python</span><span class="tag">Teaching</span><span class="tag">Leadership</span><span class="tag">Workshops</span></div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-icon">🎬</div>
+      <h3>Creative &amp; Visual</h3>
+      <p>Photoshop and video editing for polished, professional, audience-ready output.</p>
+      <div class="tag-list"><span class="tag">Photoshop</span><span class="tag">Video Editing</span><span class="tag">Design Eye</span></div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-icon">🛠️</div>
+      <h3>Dev Tools</h3>
+      <p>Comfortable across the modern developer toolchain — version control, Linux, scripting.</p>
+      <div class="tag-list"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Linux</span><span class="tag">Bash</span><span class="tag">Docker</span></div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-icon">💬</div>
+      <h3>Communication</h3>
+      <p>Running PyClub sharpened my ability to explain complex ideas clearly and lead a team.</p>
+      <div class="tag-list"><span class="tag">Communication</span><span class="tag">Problem Solving</span><span class="tag">Teamwork</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="eyebrow">Projects</div>
+  <h2 class="sec-title">Selected Work</h2>
+  <p class="sec-sub">Twelve projects spanning backend systems, data analysis, automation, creative tools, and community work.</p>
+  <div class="projects-list">
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">01 — Backend · API</div>
+        <div class="project-name">Student Resource Portal API</div>
+      </div>
+      <div class="project-desc">A RESTful API built with Django REST Framework to manage course resources, announcements, and student profiles for UMaT's CS department. Features JWT authentication, role-based access control (student / lecturer / admin), and paginated endpoints.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Django</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span><span class="tag">REST API</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">02 — Data Analysis</div>
+        <div class="project-name">Academic Performance Dashboard</div>
+      </div>
+      <div class="project-desc">Pandas-powered exploration of student performance trends across departments at UMaT. Built interactive Matplotlib and Seaborn visualisations, ran correlation analysis, and delivered a clean report with recommendations used by faculty.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span><span class="tag">Jupyter</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">03 — Community · Education</div>
+        <div class="project-name">PyClub Workshop Series</div>
+      </div>
+      <div class="project-desc">Designed and delivered a six-session Python workshop at UMaT covering fundamentals, data science intro, web scraping, and building CLI tools. Created all slides, exercises, and example code. Attended by 30+ students across levels.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Teaching</span><span class="tag">Curriculum</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">04 — Backend · Auth</div>
+        <div class="project-name">User Authentication System</div>
+      </div>
+      <div class="project-desc">A complete authentication microservice built with Flask — covering registration, login, password reset via email tokens, and OAuth2 social login. Uses bcrypt for password hashing and Redis for session management. Designed for easy integration with any frontend.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Flask</span><span class="tag">Redis</span><span class="tag">OAuth2</span><span class="tag">bcrypt</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">05 — Data · Automation</div>
+        <div class="project-name">Ghana News Headline Scraper</div>
+      </div>
+      <div class="project-desc">An automated Python scraper that collects daily headlines from three Ghanaian news sites, stores them in a SQLite database, and runs scheduled analysis — identifying trending topics and keyword frequency over time. Exports weekly PDF summary reports.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">BeautifulSoup</span><span class="tag">SQLite</span><span class="tag">Cron</span><span class="tag">NLTK</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">06 — Backend · E-commerce</div>
+        <div class="project-name">Campus Marketplace API</div>
+      </div>
+      <div class="project-desc">A RESTful marketplace backend where UMaT students can list, browse, and purchase second-hand items. Includes product listings, search and filtering, order management, and a basic notification system via email. Built with Django and deployed on a VPS.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Django</span><span class="tag">PostgreSQL</span><span class="tag">Celery</span><span class="tag">Heroku</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">07 — Data · Finance</div>
+        <div class="project-name">Personal Budget Tracker &amp; Analyser</div>
+      </div>
+      <div class="project-desc">A CLI-based personal finance tracker that reads CSV bank exports, categorises transactions using keyword matching, and generates monthly spending breakdowns with visual charts. Helped me and several friends understand where money was going each month.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Click CLI</span><span class="tag">Matplotlib</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">08 — Automation · Productivity</div>
+        <div class="project-name">Lecture Notes Organiser Bot</div>
+      </div>
+      <div class="project-desc">A Python script that watches a downloads folder for new PDF lecture notes, extracts the course code from the filename, and auto-sorts them into the correct folder structure. Saves the CS department about 30 minutes of manual file management per week.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">Watchdog</span><span class="tag">PDF Tools</span><span class="tag">Regex</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">09 — Creative · Media</div>
+        <div class="project-name">PyClub Promotional Video Series</div>
+      </div>
+      <div class="project-desc">Produced and edited a series of short promotional videos for PyClub UMaT — used for club recruitment drives and university social media. Shot, scripted, edited, and colour-graded each video. Helped grow club membership by over 40% in one semester.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Video Editing</span><span class="tag">Photoshop</span><span class="tag">Storytelling</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">10 — Backend · Utilities</div>
+        <div class="project-name">Exam Timetable Conflict Detector</div>
+      </div>
+      <div class="project-desc">A Flask web app that takes a CSV of exam schedules and a student's registered courses, then automatically detects clashes, highlights conflicts, and generates a printable personal timetable. Used by over 60 students during the last exam period at UMaT.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Flask</span><span class="tag">CSV Parsing</span><span class="tag">Jinja2</span><span class="tag">Pandas</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">11 — Backend · Notifications</div>
+        <div class="project-name">Event Reminder &amp; Notification Service</div>
+      </div>
+      <div class="project-desc">A lightweight Flask service that lets UMaT clubs schedule events and automatically sends email and SMS reminders to subscribed members 24 hours and 1 hour before each event. Includes an admin dashboard for managing events and subscriber lists.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Flask</span><span class="tag">Celery</span><span class="tag">Twilio</span><span class="tag">SQLite</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-num">12 — Data · Visualization</div>
+        <div class="project-name">PyClub Engagement Analytics</div>
+      </div>
+      <div class="project-desc">An internal analytics tool that tracks PyClub workshop attendance, sign-ups, and feedback survey scores over time. Produces termly visual reports highlighting growth trends and session popularity, used to plan future workshop topics.</div>
+      <div class="project-right">
+        <div class="project-tags"><span class="tag">Pandas</span><span class="tag">Plotly</span><span class="tag">Google Sheets API</span></div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section id="education">
+  <div class="eyebrow">Education &amp; Training</div>
+  <h2 class="sec-title">Background</h2>
+  <p class="sec-sub">University study combined with intensive real-world training through ALX Africa.</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">Current</div>
+      <h3>BSc Computer Science &amp; Engineering</h3>
+      <div class="edu-inst">University of Mines and Technology (UMaT), Ghana</div>
+      <p>Algorithms, data structures, software engineering, and systems programming. Also serving as PyClub Lead on campus.</p>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Completed — ALX Africa</div>
+      <h3>Backend Web Development</h3>
+      <div class="edu-inst">ALX Africa Software Engineering Programme</div>
+      <p>Server-side development, REST APIs, databases, and deployment. Real projects shipped to production environments.</p>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Completed — ALX Africa</div>
+      <h3>Data Analysis</h3>
+      <div class="edu-inst">ALX Africa</div>
+      <p>Data wrangling, exploratory analysis, visualisation, and storytelling with Python's analytics ecosystem.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider" />
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="eyebrow" style="margin-bottom:0.7rem;">Contact</div>
+      <h2>Let's Work Together</h2>
+      <p>I'm open to internship and junior developer roles. If you're looking for someone who combines backend skills, data knowledge, and genuine curiosity — let's talk.</p>
+      <p>You can reach me on any of the channels on the right. I typically respond within a few hours.</p>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:emmanuelyayrakotoka@gmail.com" class="contact-link">
+        <div class="cl-icon">✉️</div>
+        <div class="cl-info"><div class="cl-label">Email</div><div class="cl-val">emmanuelyayrakotoka@gmail.com</div></div>
+        <div class="cl-arr">↗</div>
+      </a>
+      <a href="tel:+233242740475" class="contact-link">
+        <div class="cl-icon">📞</div>
+        <div class="cl-info"><div class="cl-label">Phone</div><div class="cl-val">+233 242 740 475</div></div>
+        <div class="cl-arr">↗</div>
+      </a>
+      <a href="https://wa.me/233242740475" target="_blank" class="contact-link">
+        <div class="cl-icon">💬</div>
+        <div class="cl-info"><div class="cl-label">WhatsApp</div><div class="cl-val">+233 242 740 475</div></div>
+        <div class="cl-arr">↗</div>
+      </a>
+      <a href="https://github.com/keyy-tech" target="_blank" class="contact-link">
+        <div class="cl-icon">🐙</div>
+        <div class="cl-info"><div class="cl-label">GitHub</div><div class="cl-val">github.com/keyy-tech</div></div>
+        <div class="cl-arr">↗</div>
+      </a>
+      <a href="https://www.linkedin.com/in/emmanuel-kotoka-yayra-yaw-749613277/" target="_blank" class="contact-link">
+        <div class="cl-icon">💼</div>
+        <div class="cl-info"><div class="cl-label">LinkedIn</div><div class="cl-val">linkedin.com/in/emmanuel-kotoka-yayra-yaw-749613277</div></div>
+        <div class="cl-arr">↗</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Kotoka Emmanuel Yayra Yaw — 2026</span>
+  <span>Built with craft &amp; intention</span>
+</footer>
+
+<script>
+  /* DARK MODE */
+  const html = document.documentElement;
+  const btn  = document.getElementById('themeBtn');
+  const saved = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', saved);
+  btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', next);
+  });
+
+  /* TYPING */
+  const roles = ["PyClub Lead @ UMaT","Backend Developer","Data Analyst","CS & Engineering Student","Video Editor"];
+  let ri=0,ci=0,del=false;
+  const te = document.getElementById('typed-role');
+  function type() {
+    const cur = roles[ri];
+    if (!del) { te.textContent = cur.slice(0,++ci); if(ci===cur.length){del=true;setTimeout(type,2000);return;} }
+    else       { te.textContent = cur.slice(0,--ci); if(ci===0){del=false;ri=(ri+1)%roles.length;} }
+    setTimeout(type, del?38:68);
+  }
+  type();
+
+  /* SCROLL-SPY */
+  const sections = ['about','skills','projects','education','contact'];
+  const links = {};
+  sections.forEach(id => { links[id] = document.querySelector(`.nav-links a[href="#${id}"]`); });
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && links[e.target.id]) {
+        Object.values(links).forEach(l => l && l.classList.remove('active'));
+        links[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(id => { const el = document.getElementById(id); if(el) spy.observe(el); });
+
+  /* SCROLL REVEAL */
+  const rev = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.skill-cell,.project-row,.edu-card,.fact,.hero-stat,.contact-link').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(14px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    rev.observe(el);
+  });
+</script>
+</body>
+</html>
